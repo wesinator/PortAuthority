@@ -131,7 +131,7 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
         signalStrength = findViewById(R.id.signalStrength);
         ssid = findViewById(R.id.ssid);
         bssid = findViewById(R.id.bssid);
-        bssid = findViewById(R.id.bssidVendor);
+        bssidVendor = findViewById(R.id.bssidVendor);
         hostList = findViewById(R.id.hostList);
         discoverHostsBtn = findViewById(R.id.discoverHosts);
         discoverHostsStr = getResources().getString(R.string.hostDiscovery);
