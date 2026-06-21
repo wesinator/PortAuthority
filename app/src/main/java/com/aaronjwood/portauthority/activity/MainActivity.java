@@ -82,6 +82,7 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
     private TextView signalStrength;
     private TextView ssid;
     private TextView bssid;
+    private TextView bssidVendor;
     private Button discoverHostsBtn;
     private String discoverHostsStr; // Cache this so it's not looked up every time a host is found.
     private ProgressDialog scanProgressDialog;
@@ -130,6 +131,7 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
         signalStrength = findViewById(R.id.signalStrength);
         ssid = findViewById(R.id.ssid);
         bssid = findViewById(R.id.bssid);
+        bssid = findViewById(R.id.bssidVendor);
         hostList = findViewById(R.id.hostList);
         discoverHostsBtn = findViewById(R.id.discoverHosts);
         discoverHostsStr = getResources().getString(R.string.hostDiscovery);
@@ -484,6 +486,7 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
                 signalStrength.setText(R.string.wifiDisabled);
                 ssid.setText(R.string.wifiDisabled);
                 bssid.setText(R.string.wifiDisabled);
+                bssidVendor.setText(R.string.wifiDisabled);
 
                 return;
             }
@@ -526,6 +529,7 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
 
         String wifiSsid;
         String wifiBssid;
+        String wifiBssidVendor;
         try {
             wifiSsid = wifi.getSSID();
         } catch (Wireless.NoWifiManagerException e) {
@@ -534,6 +538,14 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
         }
         try {
             wifiBssid = wifi.getBSSID();
+
+            // get the vendor of bssid using the oui db
+            try {
+                wifiBssidVendor = Host.findMacVendor(wifiBssid, db);
+            } catch (SQLiteException | UnsupportedOperationException e) {
+                wifiBssidVendor = resources.getString(R.string.failedBssidVendor);
+            }
+        }
         } catch (Wireless.NoWifiManagerException e) {
             Errors.showError(context, resources.getString(R.string.failedBssid));
             return;
@@ -541,6 +553,7 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
 
         ssid.setText(wifiSsid);
         bssid.setText(wifiBssid);
+        bssidVendor.setText(wifiBssidVendor);
     }
 
     /**
