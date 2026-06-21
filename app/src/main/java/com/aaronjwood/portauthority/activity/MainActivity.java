@@ -543,8 +543,9 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
             try {
                 wifiBssidVendor = Host.findMacVendor(wifiBssid, db);
             } catch (SQLiteException | UnsupportedOperationException e) {
-                Errors.showError(context, resources.getString(R.string.failedBssidVendor));
-                return;
+                string failedBssidVendor = resources.getString(R.string.failedBssidVendor);
+                Errors.showError(context, failedBssidVendor);
+                wifiBssidVendor = failedBssidVendor;
             }
         }
         } catch (Wireless.NoWifiManagerException e) {
