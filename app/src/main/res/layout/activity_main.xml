@@ -164,6 +164,25 @@
                     android:textColor="@color/icsblue"
                     android:textIsSelectable="true" />
             </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/bssidVendorLabel"
+                    style="@style/DeviceInfoItem"
+                    android:layout_height="match_parent"
+                    android:text="@string/bssidVendor"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/bssidVendor"
+                    style="@style/DeviceInfoItem"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="@color/icsblue"
+                    android:textIsSelectable="true" />
+            </TableRow>
         </TableLayout>
 
         <LinearLayout
