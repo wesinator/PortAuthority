@@ -547,7 +547,6 @@ public final class MainActivity extends AppCompatActivity implements MainAsyncRe
                 Errors.showError(context, failedBssidVendor);
                 wifiBssidVendor = failedBssidVendor;
             }
-        }
         } catch (Wireless.NoWifiManagerException e) {
             Errors.showError(context, resources.getString(R.string.failedBssid));
             return;
